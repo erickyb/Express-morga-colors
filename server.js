@@ -1,7 +1,15 @@
 const express = require('express');
-const colors = require('colors')
+const colors = require('colors');
 const morgan = require('morgan');
+const path = require('path');
+//configuraciones
+//!uso de SET para guardarombre de variales
+//app.set('appName', 'Express Course')
+//app.set('port', 3000)
 
+//?case sentitive routing es para el programa 
+//?diferencie entre MAYUSCULAS y minusculas
+//app.set('case sentitive routing', true)
 
 const app = express();
 let products = [
@@ -11,12 +19,22 @@ let products = [
     price: 3000
   }
 ]
-//!uso de SET para guardarombre de variales
-app.set('appName', 'Express Course')
-app.set('port', 3000)
-
+//middlewares
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.use("/note.txt", (req, res) => {
+  res.send("este no es un archivo")
+});
+
+
+
+app.get('/homer', (req, res) => {
+  res.send("El inicio de la web")
+  console.log('fsdfsd')
+});
+
+
 
 app.get('/products', (req, res) => {
   res.json(products)
@@ -80,5 +98,7 @@ app.get('/products/:id', (req, res) => {
   res.json(productFound)
 });
 
-app.listen(app.get('port'))
-console.log(`Server ${app.get('appName')}`.rainbow)
+app.use("/public", express.static(path.join(__dirname, './public')));
+
+app.listen(3000)
+console.log(`Server `.rainbow)

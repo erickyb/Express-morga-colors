@@ -1,5 +1,18 @@
 <%- include('./partials/header.ejs')%>
-  <h1>
-    <%=title %>
-  </h1>
-  <%- include('./partials/footer.ejs')%>
+
+  <h1> <%- title %></h1>
+
+  <ul>
+    <% for(let i=0; i < users.length; i++) { %>
+      <li> <%- users[i].id %> .- <%- users[i].name %> <%- users[i].lastname %></li>
+      <% } %>
+  </ul>
+
+  <p><%- new Date() %></p>
+  <% if (isActive) { %>
+    <h1>el servidor esta activo </h1>
+    <% } else { %>
+      <h1>el servidor esta inactivo </h1>
+      <% } %>
+
+        <%- include('./partials/footer.ejs')%>
